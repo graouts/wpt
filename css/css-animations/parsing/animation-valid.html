@@ -14,22 +14,26 @@
 // <single-animation> = <time> || <easing-function> || <time> ||
 // <single-animation-iteration-count> || <single-animation-direction> ||
 // <single-animation-fill-mode> || <single-animation-play-state> ||
-// [ none | <keyframes-name> ]
-test_valid_value("animation", "1s", ["1s", "1s ease 0s 1 normal none running none"]);
-test_valid_value("animation", "cubic-bezier(0, -2, 1, 3)", ["cubic-bezier(0, -2, 1, 3)", "0s cubic-bezier(0, -2, 1, 3) 0s 1 normal none running none"]);
-test_valid_value("animation", "1s -3s", ["1s -3s", "1s ease -3s 1 normal none running none"]);
-test_valid_value("animation", "4", ["4", "0s ease 0s 4 normal none running none"]);
-test_valid_value("animation", "reverse", ["reverse", "0s ease 0s 1 reverse none running none"]);
-test_valid_value("animation", "both", ["both", "0s ease 0s 1 normal both running none"]);
-test_valid_value("animation", "paused", ["paused", "0s ease 0s 1 normal none paused none"]);
-test_valid_value("animation", "none", ["none", "0s ease 0s 1 normal none running none"]);
-test_valid_value("animation", "anim", ["anim", "0s ease 0s 1 normal none running anim"]);
+// <single-animation-composition> || [ none | <keyframes-name> ]
 
-test_valid_value("animation", "anim paused both reverse 4 1s -3s cubic-bezier(0, -2, 1, 3)",
-  "1s cubic-bezier(0, -2, 1, 3) -3s 4 reverse both paused anim");
+const defaultComposition = CSS.supports("animation-composition", "replace") ? " replace": "";
 
-test_valid_value("animation", "anim paused both reverse, 4 1s -3s cubic-bezier(0, -2, 1, 3)",
-  "0s ease 0s 1 reverse both paused anim, 1s cubic-bezier(0, -2, 1, 3) -3s 4 normal none running none");
+test_valid_value("animation", "1s", ["1s", `1s ease 0s 1 normal none running${defaultComposition} none`]);
+test_valid_value("animation", "cubic-bezier(0, -2, 1, 3)", ["cubic-bezier(0, -2, 1, 3)", `0s cubic-bezier(0, -2, 1, 3) 0s 1 normal none running${defaultComposition} none`]);
+test_valid_value("animation", "1s -3s", ["1s -3s", `1s ease -3s 1 normal none running${defaultComposition} none`]);
+test_valid_value("animation", "4", ["4", `0s ease 0s 4 normal none running${defaultComposition} none`]);
+test_valid_value("animation", "reverse", ["reverse", `0s ease 0s 1 reverse none running${defaultComposition} none`]);
+test_valid_value("animation", "both", ["both", `0s ease 0s 1 normal both running${defaultComposition} none`]);
+test_valid_value("animation", "paused", ["paused", `0s ease 0s 1 normal none paused${defaultComposition} none`]);
+test_valid_value("animation", "add", ["paused", "0s ease 0s 1 normal none running add none"]);
+test_valid_value("animation", "none", ["none", `0s ease 0s 1 normal none running${defaultComposition} none`]);
+test_valid_value("animation", "anim", ["anim", `0s ease 0s 1 normal none running${defaultComposition} anim`]);
+
+test_valid_value("animation", "anim add paused both reverse 4 1s -3s cubic-bezier(0, -2, 1, 3)",
+  "1s cubic-bezier(0, -2, 1, 3) -3s 4 reverse both paused add anim");
+
+test_valid_value("animation", "anim add paused both reverse, 4 1s -3s cubic-bezier(0, -2, 1, 3)",
+  `0s ease 0s 1 reverse both paused add anim, 1s cubic-bezier(0, -2, 1, 3) -3s 4 normal none running${defaultComposition} none`);
 
 // TODO: Add test with a single negative time.
 // TODO: Add test with a single timing-function keyword.

@@ -315,8 +315,7 @@ test(t => {
   for (const composite of kCompositeValues) {
     const div = addDiv(t);
 
-    div.style.animation = 'anim-simple-three 100s';
-    div.style.animationComposition = composite;
+    div.style.animation = 'anim-simple-three 100s ' + composite;
     const frames = getKeyframes(div);
 
     assert_equals(frames.length, 3, "number of frames");
@@ -349,8 +348,7 @@ test(t => {
 test(t => {
   const div = addDiv(t);
 
-  div.style.animation = 'anim-simple-composite-some 100s';
-  div.style.animationComposition = 'accumulate';
+  div.style.animation = 'anim-simple-composite-some 100s accumulate';
   const frames = getKeyframes(div);
 
   assert_equals(frames.length, 3, "number of frames");

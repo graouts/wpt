@@ -11,7 +11,7 @@
 </head>
 <body>
 <script>
-test_shorthand_value('animation', 'anim paused both reverse 4 1s -3s cubic-bezier(0, -2, 1, 3)', {
+test_shorthand_value('animation', 'anim add paused both reverse 4 1s -3s cubic-bezier(0, -2, 1, 3)', {
   'animation-duration': '1s',
   'animation-timing-function': 'cubic-bezier(0, -2, 1, 3)',
   'animation-delay': '-3s',
@@ -19,11 +19,12 @@ test_shorthand_value('animation', 'anim paused both reverse 4 1s -3s cubic-bezie
   'animation-direction': 'reverse',
   'animation-fill-mode': 'both',
   'animation-play-state': 'paused',
+  'animation-composition': 'add',
   'animation-name': 'anim',
   'animation-timeline': 'auto'
 });
 
-test_shorthand_value('animation', 'anim paused both reverse, 4 1s -3s cubic-bezier(0, -2, 1, 3)', {
+test_shorthand_value('animation', 'anim add paused both reverse, 4 1s -3s cubic-bezier(0, -2, 1, 3)', {
   'animation-duration': '0s, 1s',
   'animation-timing-function': 'ease, cubic-bezier(0, -2, 1, 3)',
   'animation-delay': '0s, -3s',
@@ -31,11 +32,12 @@ test_shorthand_value('animation', 'anim paused both reverse, 4 1s -3s cubic-bezi
   'animation-direction': 'reverse, normal',
   'animation-fill-mode': 'both, none',
   'animation-play-state': 'paused, running',
+  'animation-composition': 'add, replace',
   'animation-name': 'anim, none',
   'animation-timeline': 'auto, auto'
 });
 
-test_shorthand_value('animation', '4 1s -3s cubic-bezier(0, -2, 1, 3), anim paused both reverse', {
+test_shorthand_value('animation', '4 1s -3s cubic-bezier(0, -2, 1, 3), anim paused add both reverse', {
   'animation-duration': '1s, 0s',
   'animation-timing-function': 'cubic-bezier(0, -2, 1, 3), ease',
   'animation-delay': '-3s, 0s',
@@ -43,6 +45,7 @@ test_shorthand_value('animation', '4 1s -3s cubic-bezier(0, -2, 1, 3), anim paus
   'animation-direction': 'normal, reverse',
   'animation-fill-mode': 'none, both',
   'animation-play-state': 'running, paused',
+  'animation-composition': 'replace, add',
   'animation-name': 'none, anim',
   'animation-timeline': 'auto, auto'
 });

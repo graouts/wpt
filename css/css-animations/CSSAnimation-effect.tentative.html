@@ -133,8 +133,7 @@ promise_test(async t => {
 
 test(t => {
   const div = addDiv(t);
-  div.style.animation = 'anim 100s';
-  div.style.animationComposition = 'add';
+  div.style.animation = 'anim 100s add';
   const animation = div.getAnimations()[0];
   assert_equals(animation.effect.composite, 'add');
 }, 'Setting animation-composition sets the composite property on the effect');

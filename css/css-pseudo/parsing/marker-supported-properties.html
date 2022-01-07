@@ -52,7 +52,8 @@ test_pseudo_computed_value("::marker", "direction", "rtl");
 test_pseudo_computed_value("::marker", "content", "\"foo\"");
 
 // ::marker supports animation properties.
-test_pseudo_computed_value("::marker", "animation", "1s linear 2s infinite alternate forwards paused anim");
+const defaultComposition = CSS.supports("animation-composition", "replace") ? " replace": "";
+test_pseudo_computed_value("::marker", "animation", `1s linear 2s infinite alternate forwards paused${defaultComposition} anim`);
 test_pseudo_computed_value("::marker", "animation-delay", "1s");
 test_pseudo_computed_value("::marker", "animation-direction", "alternate");
 test_pseudo_computed_value("::marker", "animation-duration", "2s");
